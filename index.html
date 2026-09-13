@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSQUISHY - Offres Spéciales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            color: #4a4a4a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #ff3b7b;
+            text-shadow: 4px 4px 0px #ffffff, 7px 7px 0px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            background-color: #ffe600;
+            color: #333;
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* GRILLE DES PRODUITS */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border: 4px solid #ffffff;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #ff3b7b;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .prices {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .old-price {
+            font-size: 1.2rem;
+            color: #95a5a6;
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .new-price {
+            font-size: 2.2rem;
+            color: #2ecc71;
+            font-weight: 700;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff3b7b, #ff758c);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 59, 123, 0.4);
+            transition: transform 0.2s ease, background 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #e02e69, #ff5e78);
+            transform: scale(1.02);
+        }
+
+        /* SECTION CONTACT */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid #ffffff;
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+
+        .contact-section h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            word-break: break-all;
+        }
+
+        .contact-item span {
+            color: #ff3b7b;
+            font-weight: 700;
+        }
+
+        .btn-contacter {
+            background: linear-gradient(45deg, #ffe600, #ffb700);
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 183, 0, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-contacter:hover {
+            transform: scale(1.05);
+        }
+
+        .social-buttons {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .btn-social:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-snapchat { background-color: #fffc00; color: #000; text-shadow: none; }
+        .btn-tiktok { background-color: #000000; color: #ffffff; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>JSQUISHY</h1>
+        <h2>🔥 PROMO SQUISHY DE LA SEMAINE ! 🔥</h2>
+    </header>
+
+    <main class="container">
+
+        <!-- OURSON -->
+        <div class="card">
+            <div class="badge">-27%</div>
+            <div class="title">OURSON</div>
+            <div class="prices">
+                <span class="old-price">15.00$</span>
+                <span class="new-price">10.99$</span>
+            </div>
+            <a href="#contact" class="btn">Profiter de l'offre</a>
+        </div>
+
+        <!-- BEURRE -->
+        <div class="card">
+            <div class="badge">-30%</div>
+            <div class="title">BEURRE</div>
+            <div class="prices">
+                <span class="old-price">10.00$</span>
+                <span class="new-price">6.99$</span>
+            </div>
+            <a href="#contact" class="btn">Profiter de l'offre</a>
+        </div>
+
+        <!-- CAPYBARA -->
+        <div class="card">
+            <div class="badge">-10%</div>
+            <div class="title">CAPYBARA</div>
+            <div class="prices">
+                <span class="old-price">10.00$</span>
+                <span class="new-price">8.99$</span>
+            </div>
+            <a href="#contact" class="btn">Profiter de l'offre</a>
+        </div>
+
+        <!-- AXOLOTL -->
+        <div class="card">
+            <div class="badge">-10%</div>
+            <div class="title">AXOLOTL</div>
+            <div class="prices">
+                <span class="old-price">10.00$</span>
+                <span class="new-price">8.99$</span>
+            </div>
+            <a href="#contact" class="btn">Profiter de l'offre</a>
+        </div>
+
+        <!-- CRAYON 3X -->
+        <div class="card">
+            <div class="badge">-10%</div>
+            <div class="title">CRAYON (LOT DE 3)</div>
+            <div class="prices">
+                <span class="old-price">10.00$</span>
+                <span class="new-price">8.99$</span>
+            </div>
+            <a href="#contact" class="btn">Profiter de l'offre</a>
+        </div>
+
+        <!-- DUMPLING MINI -->
+        <div class="card">
+            <div class="badge">-20%</div>
+            <div class="title">DUMPLING MINI</div>
+            <div class="prices">
+                <span class="old-price">15.00$</span>
+                <span class="new-price">11.99$</span>
+            </div>
+            <a href="#contact" class="btn">Profiter de l'offre</a>
+        </div>
+
+    </main>
+
+    <!-- SECTION CONTACT -->
+    <footer id="contact" class="contact-section">
+        <h3>📩 POUR COMMANDER :</h3>
+        <div class="contact-info">
+            <div class="contact-item">
+                Snapchat : <span>jaycobservant31</span>
+            </div>
+            <div class="contact-item">
+                TikTok : <span>jaylebg.2.0</span>
+            </div>
+        </div>
+
+        <button class="btn-contacter" onclick="afficherReseaux()">Contacter</button>
+
+        <div id="social-buttons" class="social-buttons">
+            <a href="https://www.snapchat.com/add/jaycobservant31?share_id=TRyln5WjH8w&locale=fr-CA" target="_blank" class="btn-social btn-snapchat">
+                👻 Contacter sur Snapchat
+            </a>
+
+            <a href="https://www.tiktok.com/@jaylebg2.0" target="_blank" class="btn-social btn-tiktok">
+                🎵 Contacter sur TikTok
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        function afficherReseaux() {
+            document.getElementById('social-buttons').style.display = 'flex';
+        }
+    </script>
+
+</body>
+</html>
